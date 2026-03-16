@@ -512,19 +512,24 @@ def main():
     app.add_handler(CommandHandler("status", status))
     app.add_handler(CallbackQueryHandler(button_callback))
     
-    # 定时任务
-    if CHAT_ID:
-        scheduler = AsyncIOScheduler()
-        scheduler.add_job(
-            lambda: asyncio.create_task(auto_push(app)),
-            'cron',
-            minute='1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58',
-            max_instances=1
-        )
-        scheduler.start()
-    
+        # 定时任务
+    async def post_init(application):
+        if CHAT_ID:
+            scheduler = AsyncIOScheduler()
+            scheduler.add_job(
+                auto_push,
+                'cron',
+                args=[application],
+                minute='1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49,52,55,58',
+                max_instances=1
+            )
+            scheduler.start()
+            logger.info("✅ 定时推送已启动")
+
+    app.post_init = post_init
     logger.info("🚀 PC28机器人启动成功!")
     app.run_polling(drop_pending_updates=True)
+
 
 if __name__ == "__main__":   
     main()
