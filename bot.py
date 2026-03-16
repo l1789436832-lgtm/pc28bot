@@ -1,8 +1,3 @@
-# 创建目录
-mkdir -p ~/pc28bot && cd ~/pc28bot
-
-# 下载机器人代码
-cat > bot_v26.py << 'BOTCODE'
 import asyncio
 import aiohttp
 import json
@@ -531,12 +526,8 @@ def main():
     logger.info("🚀 PC28机器人启动成功!")
     app.run_polling(drop_pending_updates=True)
 
-if __name__ == "__main__":
+if __name__ == "__main__":   
     main()
-BOTCODE
-
-# 安装依赖
-pip install python-telegram-bot aiohttp apscheduler -q
 
 # 启动机器人
 python bot_v26.py
