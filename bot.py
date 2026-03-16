@@ -176,7 +176,7 @@ class Canada28Bot:
     def run(self):
         logger.info("正在启动机器人...")
         
-        self.application = Application.builder().token( "8691919071:AAGdwFG_Sh-EWW31FkrOZa3jLdw0v_V8YDc").post_init(self.post_init).build()
+        self.application = Application.builder().token( config.BOT_TOKEN).post_init(self.post_init).build()
         
         self.application.add_handler(CommandHandler("start", self.start_command))
         self.application.add_handler(CommandHandler("help", self.help_command))
