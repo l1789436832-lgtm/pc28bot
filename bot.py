@@ -528,6 +528,3 @@ def main():
 
 if __name__ == "__main__":   
     main()
-
-# 启动机器人
-python bot_v26.py
